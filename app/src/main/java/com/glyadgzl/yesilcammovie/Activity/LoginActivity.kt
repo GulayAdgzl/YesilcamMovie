@@ -51,6 +51,12 @@ fun LoginScreen(){
             modifier=Modifier.fillMaxWidth()
             )
             Spacer(modifier=Modifier.height(128.dp))
+            GradientTextField(hint="Username",modifier=Modifier.fillMaxWidth())
+            Spacer(modifier=Modifier.height(16.dp))
+            GradientTextField(hint="Password",modifier=Modifier.fillMaxWidth(),keyboardOptions=KeyboardOptions(keyboardType=KeyboardType.Password))
+            Spacer(modifier=Modifier.height(16.dp))
+            Text("Forget Your Password?",color=Color.White,modifier=Modifier.fillMaxWidth(),textAlign=TextAlign.End)
+            Spacer(modifier=Modifier.height(64.dp))
 
         }
     }
@@ -72,6 +78,7 @@ fun GradientTextField(
     ),
     shape=RoundedCornerShape(50.dp)
     )
+    .padding(4.dp)
     ){
         OutLinedTextField(
             value="",
