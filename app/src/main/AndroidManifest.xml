@@ -12,14 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YesilcamMovie"
         tools:targetApi="31">
-        <activity
-            android:name=".Activity.LoginActivity"
-            android:exported="false"
-            android:theme="@style/Theme.YesilcamMovie" />
+
         <activity
             android:name=".SplashActivity"
             android:exported="true" >
-              <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

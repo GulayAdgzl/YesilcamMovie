@@ -41,8 +41,8 @@ class SplashActivity : AppCompatActivity() {
 
         setContent {
             IntroScreen(onGetInClick = {
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
+                startActivity(Intent(this, MainActivity::class.java))
+
             })
         }
     }
@@ -84,8 +84,8 @@ horizontalAlignment= Alignment.CenterHorizontally,
 verticalArrangement= Arrangement.Center,
 modifier=Modifier.matchParentSize()
         ){
-Image(painter=painterResource(id=R.drawable.woman), contentDescription=null,
-modifier=Modifier.size(360.dp))
+Image(painter=painterResource(id=R.drawable.yes), contentDescription=null,
+modifier=Modifier.size(650.dp))
 Spacer(modifier=Modifier.height(32.dp))
             
         }
@@ -110,10 +110,11 @@ fun FootorSection(onGetInClick:()->Unit){
                 )
             )
 
-           // colors=ButtonDefaults.buttonColors(containerColor=Color.Transparent,contentColor=Color.White)
-        ),colors= ButtonDefaults.buttonColors(containerColor= Color.Transparent,contentColor=Color.White)
+
+        ),
+           colors= ButtonDefaults.buttonColors(containerColor= Color.Transparent,contentColor=Color.White)
        ){
-Text(text="Get Started",fontSize=18. sp,color=Color.White)
+            Text(text="Yeşilçam Movies",fontSize=18. sp,color=Color.White)
        }
     
     }}
