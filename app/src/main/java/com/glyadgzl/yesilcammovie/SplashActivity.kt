@@ -49,9 +49,13 @@ fun HeaderSection(){
             contentScale=ContentScale.Crop,
             modifier=Modifier.matchParentSize())
         Column(
-
+horizontalAlignment=Alignment.CenterHorizontally,
+verticalArrangement=Arrangement.Center,
+modifier=Modifier.matchParentSize()
         ){
-
+Image(painter=painterResource(id=R.drawable.woman), contentDescription=null,
+modifier=Modifier.size(360.dp))
+            
         }
     }
 }
