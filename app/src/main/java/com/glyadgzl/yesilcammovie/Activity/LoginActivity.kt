@@ -56,4 +56,45 @@ fun LoginScreen(){
     }
 }
 
+@Composable
+fun GradientTextField(
+    hint=String,
+    modifier:Modifier=Modifier
+    keyboardOptions:KeyboardOptions=KeyboardOptions.Default,
+){
+    Box(modifier=modifier
+    .height(60.dp)
+    .background(brush=Brush.linearGradient(
+        colors=listOf(
+            colorResource(id=R.color.pink),
+            colorResource(id=R.color.green)
+        )
+    ),
+    shape=RoundedCornerShape(50.dp)
+    )
+    ){
+        OutLinedTextField(
+            value="",
+            onValueChange={},
+            label={Text(text=hint,color=Color.White)},
+            singleLine=true,
+            keyboardOptions=keyboardOptions,
+            colors=TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor=Color.Transparent,
+                unfocusedBorderColor=Color.Transparent,
+                cursorColor=Color.White,
+                textColor=Color.White
+            )
+        )
+
+
+    }
+    
+    
+    {
+
+    }
+
+}
+
 
