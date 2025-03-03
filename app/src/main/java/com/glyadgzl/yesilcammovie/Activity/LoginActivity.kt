@@ -24,14 +24,25 @@ import androidx.compose.ui.unit.dp
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContent{
+            LoginScreen(onLoginClick={
+                startActivity(Intent(this,MainActivity::class.java))
+            })
+        }
 
 
     }
 }
-
 @Composable
 @Preview
-fun LoginScreen(){
+fun LoginScreenPreview(){
+    LoginScreen(onLoginClick={})
+}
+
+
+
+@Composable
+fun LoginScreen(onLoginClick:()->Unit){
     Box(
         modifier=Modifier.fillMaxSize().background(color=colorResource(R.color.blackBackground))
     ){
@@ -58,7 +69,34 @@ fun LoginScreen(){
             Text("Forget Your Password?",color=Color.White,modifier=Modifier.fillMaxWidth(),textAlign=TextAlign.End)
             Spacer(modifier=Modifier.height(64.dp))
 
+            GradientButton(text="Log in",onClick=onLoginClick,modifier=Modifier.fillMaxWidth().height(60.dp))
+
         }
+    }
+}
+
+@Composable
+fun GradientButton(
+    text:String,
+    onClick:()->Unit,
+    modifier:Modifier=Modifier
+){
+Button(onClick=onClick,
+    modifier=modifier
+   
+    shape=RoundedCornerShape(60.dp),
+    border=BorderStroke(
+        width=4.dp,brush=Brush.linearGradient(
+            colors=listOf(
+                colorResource(id=R.color.pink),
+                colorResource(id=R.color.green)
+            )
+    ),
+    color=ButtonDefaults.buttonColors(containerColor=Color.Transparent,contentColor=Color.White)
+    )
+    .padding(4.dp)
+    ){
+        Text(text=text,color=Color.White,modifier=Modifier.fillMaxWidth(),textAlign=TextAlign.Center)
     }
 }
 
