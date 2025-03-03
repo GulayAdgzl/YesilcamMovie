@@ -16,6 +16,25 @@ fun SearchBar(hint:String=""){
             tint=Color.White,
             modifier=Modifier.size(24.dp)
         )
+        Spacer(modifier=Modifier.width(8.dp))
+        TextField(value="",
+        onValueChange={},
+        placeholder={Text(text=hint,color=Color(0xffbdbdbd))},
+        colors=TextFieldDefaults.textFieldColors(
+            cursorColor=Color.White,
+            focusedIndicatorColor=Color.Transparent,
+            unfocusedIndicatorColor=Color.Transparent,
+            containerColor=Color.Transparent,
+            focusedIndicatorColor=Color.White,
+           
+        
+        ),
+        modifier=Modifier.weight(1f).
+        fillMaxWidth(),
+        textStyle=TextStyle(color=Color.White,fontSize=16.sp),
+        singleLine=true,
+        shape=RoundedCornerShape(50.dp)
+        )
     }
 
 }
