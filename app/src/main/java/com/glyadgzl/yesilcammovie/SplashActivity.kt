@@ -26,9 +26,18 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
     }
 }
+
+
 @Composable
 @Preview
-fun IntroScreen(){
+fun IntroScreenPreview(){
+    IntroScreen(onGetInClick={})
+}
+
+
+
+@Composable
+fun IntroScreen(onGetInClick:()->Unit){
     Box(
         modifier=Modifier.fillMaxSize().background(color= colorResource(R.color
             .blackBackground))
@@ -37,7 +46,7 @@ fun IntroScreen(){
             modifier=Modifier.fillMaxSize().verticalScroll(rememberScrollState())
         ){
             HeaderSection()
-            FootorSection()
+            FootorSection(onGetInClick)
 
         }
     }
@@ -62,7 +71,7 @@ Spacer(modifier=Modifier.height(32.dp))
     }
 }
 @Composable
-fun FootorSection(){
+fun FootorSection(onGetInClick:()->Unit){
     Box(modifier=Modifier.fillMaxWidth().height(200.dp)){
         Image(painter=painterResource(id=R.drawable.bg2), contentDescription=null,
             contentScale=ContentScale.Crop,
@@ -70,7 +79,7 @@ fun FootorSection(){
        Button(
         modifier=Modifier.size(200.dp,50.dp).align(Alignment.Center),
         shape=RoundedCornerShape(50.dp),
-        onClick={},
+        onClick=onGetInClick,
         border=BorderStroke(
             width=4.dp,
             brush=Brush.linearGradient(
