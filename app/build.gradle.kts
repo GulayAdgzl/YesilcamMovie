@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.glyadgzl.yesilcammovie"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.glyadgzl.yesilcammovie"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -56,4 +56,13 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation("com.github.bumptech.glide:glide:4.13.0")
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("io.coil-kt:coil-compose:2.2.2")
+    implementation("androidx.compose.foundation:foundation:1.5.0")
+    implementation("androidx.lifecycle-runtime-ktx:2.x.x")
+    implementation("androidx.compose.runtime:runtime-livedata:x.x.x")
+    implementation("com.google.accompanist:accompanist-pager:0.28.0")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.28.0")
 }
