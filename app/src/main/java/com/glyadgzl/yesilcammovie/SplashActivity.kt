@@ -37,6 +37,7 @@ fun IntroScreen(){
             modifier=Modifier.fillMaxSize().verticalScroll(rememberScrollState())
         ){
             HeaderSection()
+            FootorSection()
 
         }
     }
@@ -55,7 +56,33 @@ modifier=Modifier.matchParentSize()
         ){
 Image(painter=painterResource(id=R.drawable.woman), contentDescription=null,
 modifier=Modifier.size(360.dp))
+Spacer(modifier=Modifier.height(32.dp))
             
         }
     }
 }
+@Composable
+fun FootorSection(){
+    Box(modifier=Modifier.fillMaxWidth().height(200.dp)){
+        Image(painter=painterResource(id=R.drawable.bg2), contentDescription=null,
+            contentScale=ContentScale.Crop,
+            modifier=Modifier.matchParentSize())
+       Button(
+        modifier=Modifier.size(200.dp,50.dp).align(Alignment.Center),
+        shape=RoundedCornerShape(50.dp),
+        onClick={},
+        border=BorderStroke(
+            width=4.dp,
+            brush=Brush.linearGradient(
+                colors=listOf(
+                    colorResource(id=R.color.pink),
+                    colorResource(id=R.color.green)
+                )
+            ),
+            colors=ButtonDefaults.buttonColors(containerColor=Color.Transparent,contentColor=Color.White)
+        )
+       ){
+Text(text="Get Started",style=MaterialTheme.typography.h6,color=Color.White)
+       }
+    
+    }}
