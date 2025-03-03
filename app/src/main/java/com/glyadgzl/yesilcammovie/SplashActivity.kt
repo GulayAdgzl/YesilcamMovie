@@ -24,6 +24,13 @@ import androidx.compose.ui.unit.dp
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setContent {
+            IntroScreen(onGetInClick = {
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            })
+        }
     }
 }
 
