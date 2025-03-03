@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "817160770448",
+    "project_id": "yesilcam-4068a",
+    "storage_bucket": "yesilcam-4068a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817160770448:android:4cae5672ae1518b27d9915",
+        "android_client_info": {
+          "package_name": "com.glyadgzl.yesilcammovie"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy5vB7zqhoi2BVExgDuBcWOwy-U74L7PU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
