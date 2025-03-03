@@ -76,15 +76,21 @@ fun GradientTextField(
         OutLinedTextField(
             value="",
             onValueChange={},
-            label={Text(text=hint,color=Color.White)},
+            placeholder={Text(text=hint,color=Color.White,modifier=Modifier.fillMaxWidth(),textAlign=TextAlign.Center)},
             singleLine=true,
+            textStyle=TextStyle(color=Color.White,textAlign=TextAlign.Center),
             keyboardOptions=keyboardOptions,
             colors=TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor=Color.Transparent,
                 unfocusedBorderColor=Color.Transparent,
                 cursorColor=Color.White,
                 textColor=Color.White
+            ),
+            keyboardOptions=keyboardOptions,
+            modifier=Modifier.fillMaxWidth().background(color=colorResource(R.color.black1),
+            shape=RoundedCornerShape(50.dp)
             )
+            .align(Alignment.Center)
         )
 
 
