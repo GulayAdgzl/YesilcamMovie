@@ -32,6 +32,37 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainContent(onItemClick:(FilmItemModel)->Unit){
+
+    val viewModel=MainViewModel()
+    val upcoming=remember{mutableStateOf<FilmItemModel>()}
+    val newMoview=remember{mutableStateOf<FilmItemModel>()}
+
+    var showUpcoming by remember{mutableStateOf(true)}
+    var showNewMoview by remember{mutableStateOf(true)}
+
+    LaunchedEffect( Unit){
+        viewModel.loadUpcoming().observeForever{
+            upcoming.clear()
+            upcoming.addAll(it)
+            showUpcoming=false
+        }
+       
+    }
+
+    LaunchedEffect( Unit){
+        viewModel.loadItems().observeForever{
+            newMoview.clear()
+            newMoview.addAll(it)
+            showNewMoview=false
+        }
+       
+    }
+
+
+
+
+
+
     Column(
         modifier=Modifier.fillMaxSize()
         .verticalScroll(rememberScrollState())
@@ -39,7 +70,7 @@ fun MainContent(onItemClick:(FilmItemModel)->Unit){
     ){
         Text(text="What would you like to watch",style=TextStyle(color=Color.White,fontSize=25.sp),
         modifier=Modifier.align(Alignment.CenterHorizontally).padding(start=16.dp,bottom=16.dp).fillMaxWidth())
-        SearchBar()
+        SearchBar(hint="Search for movies")
     }
 
 }

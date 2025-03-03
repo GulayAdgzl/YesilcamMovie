@@ -6,7 +6,7 @@ fun SearchBar(hint:String=""){
             color=Color(0x20ffffff),
             shape=RoundedCornerShape(50.dp)
         )
-        .padding(horizontal=50.dp),
+        .padding(horizontal=16.dp),
         verticalAlignment=Alignment.CenterVertically
 
     ){
