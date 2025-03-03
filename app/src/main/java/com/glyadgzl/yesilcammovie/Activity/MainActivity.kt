@@ -31,17 +31,15 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    YesilcamMovieTheme {
-        Greeting("Android")
+fun MainContent(onItemClick:(FilmItemModel)->Unit){
+    Column(
+        modifier=Modifier.fillMaxSize()
+        .verticalScroll(rememberScrollState())
+        .padding(top=60.dp,bottom=100.dp)
+    ){
+        Text(text="What would you like to watch",style=TextStyle(color=Color.White,fontSize=25.sp),
+        modifier=Modifier.align(Alignment.CenterHorizontally).padding(start=16.dp,bottom=16.dp).fillMaxWidth())
+        SearchBar()
     }
+
 }
