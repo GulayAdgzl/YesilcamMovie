@@ -21,84 +21,39 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-class SplashActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContent {
-            IntroScreen(onGetInClick = {
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
-            })
-        }
+
     }
 }
-
 
 @Composable
 @Preview
-fun IntroScreenPreview(){
-    IntroScreen(onGetInClick={})
-}
-
-
-
-@Composable
-fun IntroScreen(onGetInClick:()->Unit){
+fun LoginScreen(){
     Box(
-        modifier=Modifier.fillMaxSize().background(color= colorResource(R.color
-            .blackBackground))
+        modifier=Modifier.fillMaxSize().background(color=colorResource(R.color.blackBackground))
     ){
+
+        Image(painter=painterResource(id=R.drawable.bg1),
+        contentScale=ContentScale.Crop,
+        contentDescription=null,
+        modifier=Modifier.matchParentSize()
+        )
         Column(
             modifier=Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+            .padding(horizontal=32.dp,vertical=16.dp)
         ){
-            HeaderSection()
-            FootorSection(onGetInClick)
+            Spacer(modifier=Modifier.height(100.dp))
+            Text(text="Log in",
+            style=TextStyle(color=Color.White,fontSize=50.sp,fontWeight=FontWeight.Bold),
+            modifier=Modifier.fillMaxWidth()
+            )
+            Spacer(modifier=Modifier.height(128.dp))
 
         }
     }
 }
 
-@Composable
-fun HeaderSection(){
-    Box(modifier=Modifier.fillMaxWidth().height(650. dp)){
-        Image(painter = painterResource(id=R.drawable.bg1), contentDescription = null,
-            contentScale=ContentScale.Crop,
-            modifier=Modifier.matchParentSize())
-        Column(
-horizontalAlignment=Alignment.CenterHorizontally,
-verticalArrangement=Arrangement.Center,
-modifier=Modifier.matchParentSize()
-        ){
-Image(painter=painterResource(id=R.drawable.woman), contentDescription=null,
-modifier=Modifier.size(360.dp))
-Spacer(modifier=Modifier.height(32.dp))
-            
-        }
-    }
-}
-@Composable
-fun FootorSection(onGetInClick:()->Unit){
-    Box(modifier=Modifier.fillMaxWidth().height(200.dp)){
-        Image(painter=painterResource(id=R.drawable.bg2), contentDescription=null,
-            contentScale=ContentScale.Crop,
-            modifier=Modifier.matchParentSize())
-       Button(
-        modifier=Modifier.size(200.dp,50.dp).align(Alignment.Center),
-        shape=RoundedCornerShape(50.dp),
-        onClick=onGetInClick,
-        border=BorderStroke(
-            width=4.dp,
-            brush=Brush.linearGradient(
-                colors=listOf(
-                    colorResource(id=R.color.pink),
-                    colorResource(id=R.color.green)
-                )
-            ),
-            colors=ButtonDefaults.buttonColors(containerColor=Color.Transparent,contentColor=Color.White)
-        )
-       ){
-Text(text="Get Started",style=MaterialTheme.typography.h6,color=Color.White)
-       }
-    
-    }}
+

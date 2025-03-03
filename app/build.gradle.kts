@@ -39,6 +39,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
 }
 
@@ -56,6 +57,9 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -68,7 +72,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.12.1")
     implementation(libs.coil.compose)
     implementation("androidx.compose.foundation:foundation:1.7.8")
-    implementation("androidx.lifecycle-runtime-ktx:2.x.x")
+   // implementation("androidx.lifecycle-runtime-ktx:2.x.x")
     implementation(libs.androidx.runtime.livedata)
     implementation(libs.accompanist.pager)
     implementation("com.google.accompanist:accompanist-pager-indicators:0.28.0")
