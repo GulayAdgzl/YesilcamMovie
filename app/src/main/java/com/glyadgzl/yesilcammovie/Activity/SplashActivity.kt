@@ -3,7 +3,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 
-import androidx.appcompat.app.AppCompatActivity
+
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -34,8 +34,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.glyadgzl.yesilcammovie.Activity.BaseActivity
 
-class SplashActivity : AppCompatActivity() {
+
+class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
