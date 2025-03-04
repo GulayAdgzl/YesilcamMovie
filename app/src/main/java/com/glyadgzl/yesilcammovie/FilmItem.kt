@@ -5,7 +5,7 @@ fun FilmItem(item: FilmItemModel, onItemClick: (FilmItemModel) -> Unit) {
             .padding(4.dp)
             .width(120.dp)
             .clickable { onItemClick(item) }
-            .background(color = Color(android.graphics.Color.parseColor("#2f22f39")))
+            .background(color = Color(android.graphics.Color.parseColor("#2f2f39")))
     ) {
         AsyncImage(
             model = item.Poster,

@@ -30,19 +30,50 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.glyadgzl.yesilcammovie.ui.theme.YesilcamMovieTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        
         setContent {
-            YesilcamMovieTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                  MainContent  ()
-                }
-            }
+            MainScreen(onItemClick={
+                
+            })
+           
         }
     }
 }
+
+
+@Preview
+@Composable
+fun MainScreen(onItemClick:(FilmItemModel)->Unit){
+    Scaffold(
+        backgroundColor=colorResource(R.color.blackBackground),
+        topBar = {
+            TopBar()
+        }
+    ){
+        MainContent(onItemClick)
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @Composable
 fun MainContent(onItemClick:(FilmItemModel)->Unit){
@@ -97,8 +128,27 @@ fun MainContent(onItemClick:(FilmItemModel)->Unit){
                 horizontalArrangement=Arrangement.spacedBy(8.dp),
                 centerPadding=PaddingValues(horizontal=16.dp)
             ){
-                items(newMoview){
-                    item->
+                items(newMoview){item->
+                    FilmItem(item,onItemClick)
+                }
+            }
+        }
+
+        SectionTitle("Upcoming Movies")
+
+        if(showUpcoming){
+            Box(
+                modifier=Modifier.fillMaxWidth().height(50.dp),contentAlignment=Alignment.Center
+                ){
+                CircularProgressIndicator()
+               }
+        }else{
+            LazyRow(
+                horizontalArrangement=Arrangement.spacedBy(8.dp),
+                centerPadding=PaddingValues(horizontal=16.dp)
+            ){
+                items(upcoming){item->
+                    FilmItem(item,onItemClick)
                 }
             }
         }
