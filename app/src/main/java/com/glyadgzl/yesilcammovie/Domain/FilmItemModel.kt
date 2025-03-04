@@ -1,3 +1,4 @@
+import java.io.Serializable
 data class FilmItemModel(
     var Title:String="",
     var Year:String="",

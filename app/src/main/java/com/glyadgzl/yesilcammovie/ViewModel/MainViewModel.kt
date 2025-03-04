@@ -1,5 +1,8 @@
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+
 class MainViewModel : ViewModel() {
-    private val repository = MovieRepository()
+    private val repository = MainRepository()
     
     fun loadUpcoming(): LiveData<MutableList<FilmItemModel>> {
         return repository.loadUpcoming()

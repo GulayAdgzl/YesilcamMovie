@@ -1,8 +1,16 @@
-class MainRepository{
-    private val firebaseDatabase=FirebaseDatabase.getInstance()
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
-    fun loadUpcoming():LiveData<MutableList<FilmItemModel>>{
-        val listData=MutableLiveData<MutableList<FilmItemModel>>()
+class MainRepository{
+    private val firebaseDatabase= FirebaseDatabase.getInstance()
+
+    fun loadUpcoming(): LiveData<MutableList<FilmItemModel>> {
+        val listData= MutableLiveData<MutableList<FilmItemModel>>()
       val ref=  firebaseDatabase.getReference("Upcoming")
         ref.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -25,7 +33,7 @@ class MainRepository{
     fun loadItems():LiveData<MutableList<FilmItemModel>>{
         val listData=MutableLiveData<MutableList<FilmItemModel>>()
       val ref=  firebaseDatabase.getReference("Items")
-        ref.addValueEventListener(object :ValueEventListener{
+        ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val lists=mutableListOf<FilmItemModel>()
                 for (i in snapshot.children){
