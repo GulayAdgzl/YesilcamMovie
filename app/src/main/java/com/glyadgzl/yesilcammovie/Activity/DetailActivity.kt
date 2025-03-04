@@ -81,8 +81,97 @@ fun DeatilScreen(film:FilItemModel,onBackClick:()->Unit){
                     
                     )
 
-
+                    Text(
+                        text=film.Title,
+                        style=TextStyle(color=Color.White,fontSize=25.sp),
+                        modifier=Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(end=16.dp,top=16.dp)
+                    )
                 }
+                    Spacer(modifier=Modifier.height(16.dp))
+                    Column(modifier=Modifier.padding(horizontal=16.dp)){
+                        Row(
+                            horizontalArrangement=Arrangement.SpaceBetween,
+                            verticalAlignment=Alignment.CenterVertically
+                        ){
+                            Icon(
+                                painter=painterResource(id = R.drawable.star),
+                                contentDescription=null,
+                                tint=Color.White
+                                modifier=Modifier.padding(horizontal=8.dp)
+                            )
+                            Text(
+                                text="IMBD: ${film.imdb}",
+                                style=TextStyle(color=Color.White)
+                            )
+
+                            Icon(
+                                painter=painterResource(id = R.drawable.time),
+                                contentDescription=null,
+                                tint=Color.White
+                                modifier=Modifier.padding(horizontal=8.dp)
+                            )
+                            Text(
+                                text="Runtime: ${film.Time}",
+                                style=TextStyle(color=Color.White)
+                            )
+
+                            Icon(
+                                painter=painterResource(id = R.drawable.cal),
+                                contentDescription=null,
+                                tint=Color.White
+                                modifier=Modifier.padding(horizontal=8.dp)
+                            )
+                            Text(
+                                text="Release: ${film.Year}",
+                                style=TextStyle(color=Color.White)
+                            )
+                        }
+                        Spacer(modifier=Modifier.height(24.dp))
+                        Text(
+                            text="Summary ",
+                            style=TextStyle(color=Color.White,fontSize=16.sp)
+                        )
+                        Spacer(modifier=Modifier.height(8.dp))
+
+                        Text(
+                            text=film.Description,
+                            style=TextStyle(color=Color.White,fontSize=14.sp)
+                        )
+                        Spacer(modifier=Modifier.height(24.dp))
+                        Text(
+                            text="Actors",
+                            style=TextStyle(color=Color.White,fontSize=16.sp)
+                        )
+                        Spacer(modifier=Modifier.height(8.dp))
+
+                        LazyRow(contentPadding=PaddingValues(8.dp)){
+                            items(film.Casts.size){
+                                film.Casts[it].Actor?.let{
+                                    Text(
+                                        text="$it",
+                                        style=TextStyle(color=Color.White,fontSize=14.sp),
+                                        modifier=Modifier.padding(end=8.dp)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    LazyRow(contentPadding=PaddingValues(8.dp)){
+                        items(film.Casts.size){
+                            AsyncImage(
+                                model=film.Casts[it].PicUrl,
+                                contentDescription=null,
+                                modifier=Modifier.size(75.dp)
+                                .clip(RoundedCornerShape(50.dp))
+                                .padding(4.dp),
+                                contentScale=ContentScale.Crop
+                            )
+                        }
+                          
+
+                
             }
         }
     }
