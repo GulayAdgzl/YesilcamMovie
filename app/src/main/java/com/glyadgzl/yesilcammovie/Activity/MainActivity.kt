@@ -85,8 +85,17 @@ fun MainContent(onItemClick:(FilmItemModel)->Unit){
         Text(text="What would you like to watch",style= TextStyle(color= Color. White,fontSize=25. sp),
         modifier=Modifier.align(Alignment.CenterHorizontally).padding(start=16.dp,bottom=16.dp).fillMaxWidth())
         SearchBar(hint="Search for movies")
+        SectionTitle("New Moview")
     }
 
 }
 
-///1:25:03 de kaldım
+@Composable
+fun SectionTitle(title:String){
+    Text(
+        text=title,
+        style= TextStyle(color= Color(0xffffc107),fontSize=18. sp),
+        modifier=Modifier.padding(start=16.dp,top=32.dp,bottom=8.dp),
+        fontWeight=FontWeight.Bold
+    )
+}
