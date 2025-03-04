@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
@@ -39,135 +41,115 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.glyadgzl.yesilcammovie.ui.theme.YesilcamMovieTheme
 
-class MainActivity :BaseActivity() {
+class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
         setContent {
-            MainScreen(onItemClick={
-                
-            })
-           
+            MainScreen(onItemClick = {})
         }
     }
 }
 
-
-@Preview
 @Composable
-fun MainScreen(onItemClick:(FilmItemModel)->Unit){
-  Scaffold() {
-
-      MainContent(onItemClick)
-  }
-
+fun MainScreen(onItemClick: (FilmItemModel) -> Unit) {
+    Scaffold {
+        MainContent(onItemClick)
+    }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @Composable
-fun MainContent(onItemClick:(FilmItemModel)->Unit){
+fun MainContent(onItemClick: (FilmItemModel) -> Unit) {
+    val viewModel = MainViewModel()
+    val upcomingMovies = remember { mutableStateListOf<FilmItemModel>() }
+    val newMovies = remember { mutableStateListOf<FilmItemModel>() }
+    
+    var isLoadingUpcoming by remember { mutableStateOf(true) }
+    var isLoadingNewMovies by remember { mutableStateOf(true) }
 
-    val viewModel=MainViewModel()
-    val upcoming=remember{mutableStateOf<FilmItemModel>()}
-    val newMoview=remember{mutableStateOf<FilmItemModel>()}
-
-    val showUpcoming by remember{mutableStateOf(true)}
-    var showNewMoview by remember{mutableStateOf(true)}
-
-    LaunchedEffect( Unit){
-        viewModel.loadUpcoming().observeForever{
-            upcoming.clear()
-            upcoming.addAll(it)
-            showUpcoming=false
+    // Filmleri yükleme
+    LaunchedEffect(Unit) {
+        viewModel.loadUpcoming().observeForever { movies ->
+            upcomingMovies.clear()
+            upcomingMovies.addAll(movies)
+            isLoadingUpcoming = false
         }
-       
     }
 
-    LaunchedEffect( Unit){
-        viewModel.loadItems().observeForever{
-            newMoview.clear()
-            newMoview.addAll(it)
-            showNewMoview=false
+    LaunchedEffect(Unit) {
+        viewModel.loadItems().observeForever { movies ->
+            newMovies.clear()
+            newMovies.addAll(movies)
+            isLoadingNewMovies = false
         }
-       
     }
-
-
-
-
- 
 
     Column(
-        modifier=Modifier.fillMaxSize()
-        .verticalScroll(rememberScrollState())
-        .padding(top=60.dp,bottom=100.dp)
-    ){
-        Text(text="What would you like to watch",style= TextStyle(color= Color. White,fontSize=25. sp),
-        modifier=Modifier.align(Alignment.CenterHorizontally).padding(start=16.dp,bottom=16.dp).fillMaxWidth())
-        SearchBar(hint="Search for movies")
-        SectionTitle("New Moview")
-        if(showNewMoview){
-            Box(
-                modifier=Modifier.fillMaxWidth().height(50.dp),contentAlignment=Alignment.Center
-                ){
-                CircularProgressIndicator()
-               }
-        }else{
-            LazyRow (
-                horizontalArrangement= Arrangement.spacedBy(8.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(top = 60.dp, bottom = 100.dp)
+    ) {
+        // Başlık
+        Text(
+            text = "What would you like to watch?",
+            style = TextStyle(color = Color.White, fontSize = 25.sp),
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(start = 16.dp, bottom = 16.dp)
+                .fillMaxWidth()
+        )
 
-               // centerPadding= PaddingValues(horizontal=16.dp)
-            ){
-                items(newMoview){item->
-                    FilmItem(item,onItemClick)
-                }
-            }
+        // Arama Çubuğu
+        SearchBar(hint = "Search for movies")
+
+        // Yeni Filmler
+        SectionTitle("New Movies")
+        if (isLoadingNewMovies) {
+            LoadingIndicator()
+        } else {
+            MovieList(newMovies, onItemClick)
         }
 
+        // Yaklaşan Filmler
         SectionTitle("Upcoming Movies")
-
-        if(showUpcoming){
-            Box(
-                modifier=Modifier.fillMaxWidth().height(50.dp),contentAlignment=Alignment.Center
-                ){
-                CircularProgressIndicator()
-               }
-        }else{
-            LazyRow(
-                horizontalArrangement=Arrangement.spacedBy(8.dp),
-             //   centerPadding=PaddingValues(horizontal=16.dp)
-            ){
-                items(upcoming){item->
-                    FilmItem(item,onItemClick)
-                }
-            }
+        if (isLoadingUpcoming) {
+            LoadingIndicator()
+        } else {
+            MovieList(upcomingMovies, onItemClick)
         }
     }
-
 }
 
 @Composable
-fun SectionTitle(title:String){
+fun LoadingIndicator() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(50.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        CircularProgressIndicator()
+    }
+}
+
+@Composable
+fun MovieList(movies: List<FilmItemModel>, onItemClick: (FilmItemModel) -> Unit) {
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp)
+    ) {
+        items(movies) { movie ->
+            FilmItem(movie, onItemClick)
+        }
+    }
+}
+
+@Composable
+fun SectionTitle(title: String) {
     Text(
-        text=title,
-        style= TextStyle(color= Color(0xffffc107),fontSize=18. sp),
-        modifier=Modifier.padding(start=16.dp,top=32.dp,bottom=8.dp),
-        fontWeight=FontWeight.Bold
+        text = title,
+        style = TextStyle(color = Color(0xFFFFC107), fontSize = 18.sp),
+        fontWeight = FontWeight.Bold,
+        modifier = Modifier.padding(start = 16.dp, top = 32.dp, bottom = 8.dp)
     )
 }
