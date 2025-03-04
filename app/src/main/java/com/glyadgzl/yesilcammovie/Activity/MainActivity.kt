@@ -48,7 +48,13 @@ class MainActivity :BaseActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen(onItemClick = {})
+            MainScreen(onItemClick = {item->
+                val intent=Intent(this,DetailActivity::class.java)
+                intent.putExtra("object",item)
+                startActivity(intent)
+
+
+            })
         }
     }
 }
