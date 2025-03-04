@@ -86,6 +86,22 @@ fun MainContent(onItemClick:(FilmItemModel)->Unit){
         modifier=Modifier.align(Alignment.CenterHorizontally).padding(start=16.dp,bottom=16.dp).fillMaxWidth())
         SearchBar(hint="Search for movies")
         SectionTitle("New Moview")
+        if(showNewMoview){
+            Box(
+                modifier=Modifier.fillMaxWidth().height(50.dp),contentAlignment=Alignment.Center
+                ){
+                CircularProgressIndicator()
+               }
+        }else{
+            LazyRow(
+                horizontalArrangement=Arrangement.spacedBy(8.dp),
+                centerPadding=PaddingValues(horizontal=16.dp)
+            ){
+                items(newMoview){
+                    item->
+                }
+            }
+        }
     }
 
 }
