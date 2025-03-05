@@ -4,6 +4,7 @@ import FilmItem
 import FilmItemModel
 import MainViewModel
 import SearchBar
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,6 +19,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -36,12 +38,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.glyadgzl.yesilcammovie.Activity.BaseActivity
+import com.glyadgzl.yesilcammovie.Activity.DetailActivity
 import com.glyadgzl.yesilcammovie.ui.theme.YesilcamMovieTheme
 
 class MainActivity :BaseActivity(){
@@ -49,7 +50,7 @@ class MainActivity :BaseActivity(){
         super.onCreate(savedInstanceState)
         setContent {
             MainScreen(onItemClick = {item->
-                val intent=Intent(this,DetailActivity::class.java)
+                val intent= Intent(this, DetailActivity::class.java)
                 intent.putExtra("object",item)
                 startActivity(intent)
 
@@ -60,7 +61,6 @@ class MainActivity :BaseActivity(){
 }
 
 @Composable
-
 fun MainScreen(onItemClick: (FilmItemModel) -> Unit) {
     Scaffold(
         content = { paddingValues ->
@@ -120,21 +120,22 @@ fun MainContent(onItemClick: (FilmItemModel) -> Unit) {
         // Arama Çubuğu
         SearchBar(hint = "Search for movies")
 
-        // Yeni Filmler
-        SectionTitle("New Movies")
+      
         if (isLoadingNewMovies) {
             LoadingIndicator()
         } else {
             MovieList(newMovies, onItemClick)
         }
 
-        // Yaklaşan Filmler
-        SectionTitle("Upcoming Movies")
-        if (isLoadingUpcoming) {
+        if (isLoadingNewMovies) {
             LoadingIndicator()
         } else {
-            MovieList(upcomingMovies, onItemClick)
+            MovieList(newMovies, onItemClick)
         }
+
+
+
+
     }
 }
 
@@ -153,8 +154,8 @@ fun LoadingIndicator() {
 @Composable
 fun MovieList(movies: List<FilmItemModel>, onItemClick: (FilmItemModel) -> Unit) {
     LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp)
+        horizontalArrangement = Arrangement.spacedBy(12.dp), // Öğeler arası boşluk
+        contentPadding = PaddingValues(16.dp)
     ) {
         items(movies) { movie ->
             FilmItem(movie, onItemClick)
@@ -162,12 +163,4 @@ fun MovieList(movies: List<FilmItemModel>, onItemClick: (FilmItemModel) -> Unit)
     }
 }
 
-@Composable
-fun SectionTitle(title: String) {
-    Text(
-        text = title,
-        style = TextStyle(color = Color(0xFFFFC107), fontSize = 18.sp),
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier.padding(start = 16.dp, top = 32.dp, bottom = 8.dp)
-    )
-}
+
