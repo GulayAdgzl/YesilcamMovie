@@ -28,14 +28,7 @@ Bu mobil uygulama, Türk sinemasının zengin mirasını modern Android teknoloj
 - Kotlin 1.8.0+
 - Android SDK 21 ve üzeri
 
-## 🔧 Kurulum
-1. Depoyu klonlayın
-```bash
-git clone https://github.com/kullanici-adi/yesilyam-filmleri-app.git
-```
-2. Android Studio'da projeyi açın
-3. Gerekli bağımlılıkları indirin
-4. Firebase yapılandırmanızı ekleyin
+
 
 ## 🖼 Ekran Görüntüleri
 
